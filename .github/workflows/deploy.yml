@@ -22,15 +22,15 @@ jobs:
         run: dotnet restore deploy-somee.sln
 
       - name: Build project
-        run: dotnet build deploy-somee.sln --configuration Release
+        run: dotnet build HelloSomee.sln --configuration Release
 
       - name: Publish project
-        run: dotnet publish deploy-somee.sln --configuration Release --output ./publish
+        run: dotnet publish HelloSomee.sln --configuration Release --output ./publish
 
       - name: Deploy to Somee via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.yourdomain.somee.com
+          server: ftp://techmyweb.somee.com/www.techmyweb.somee.com
           username: ${{ secrets.SOMEE_FTP_USER }}
           password: ${{ secrets.SOMEE_FTP_PASS }}
           local-dir: ./publish
